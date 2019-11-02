@@ -1,0 +1,306 @@
+#文件的读取
+import os
+os.chdir("d:\pydata")
+#文本形式打开文件
+tf=open("f.txt","rt")
+print(tf.readline())
+tf.close()
+#文件的读取
+import os
+os.chdir("d:\pydata")
+#文本形式打开文件
+tf=open("f.txt","rt")
+print(tf.readline())
+tf.close()
+中国是个伟大的国家！中国是个伟大的国家！中国法国美国中国 美国 日本中国$美国$日本
+#二进制形式打开文件
+bf=open("f.txt","rb")
+print(bf.readline())
+tf.close()
+b'\xd6\xd0\xb9\xfa\xca\xc7\xb8\xf6\xce\xb0\xb4\xf3\xb5\xc4\xb9\xfa\xbc\xd2\xa3\xa1'
+#逐个遍历全文本，适合小文本文件
+fname=input("请输入要打开的文件名称：")
+fo=open(fname,"r")
+txt=fo.read()#对全文txt进行处理,一次读入统一处理
+print(txt)
+fo.close()
+请输入要打开的文件名称：f.txt
+中国是个伟大的国家！中国是个伟大的国家！中国法国美国
+#逐个遍历全文本，适合大文本文件
+fname=input("请输入要打开的文件名称：")
+fo=open(fname,"r")
+txt=fo.read(2)
+ls=[]
+while txt !="":
+    ls+=txt
+    txt=fo.read(2)#对txt进行处理，按数量读入逐步处理
+    print(ls)
+fo.close()
+请输入要打开的文件名称：f.txt
+['中', '国']
+['中', '国', '是', '个']
+['中', '国', '是', '个', '伟', '大']
+['中', '国', '是', '个', '伟', '大', '的', '国']
+['中', '国', '是', '个', '伟', '大', '的', '国', '家', '！']
+#逐行遍历全文本，适合小文本文件
+fname=input("请输入要打开的文件名称：")
+fo=open(fname,"r")
+for line in fo.readlines():#一次读入，分行处理
+    print(line)
+fo.close()
+请输入要打开的文件名称：f.txt
+中国是个伟大的国家！
+#逐行遍历全文本，适合大文本文件
+fname=input("请输入要打开的文件名称：")
+fo=open(fname,"r")
+for line in fo:#分行读入，逐行处理
+    print(line)
+fo.close()
+请输入要打开的文件名称：f.txt
+中国是个伟大的国家！
+#文件的写入,字符串写入文件
+f=open("f.txt","a+")
+f.write("中国是个伟大的国家！")
+f.close()
+fo=open("f.txt","r")
+print(fo)
+<_io.TextIOWrapper name='f.txt' mode='r' encoding='cp936'>
+#文件的写入,文本列表写入文件
+f=open("f.txt","a+")
+ls=["中国","法国","美国"]
+f.writelines(ls)
+f.close()
+#seek改变当前文件操作指针的位置，0-开头 1-当前位置 2-文件结尾
+#以下没有输出是因为指针在写入的数据之后，而指针之后空白无输出内容
+fo=open("output.txt","w+")
+ls=["中国","法国","美国"]
+fo.writelines(ls)
+for line in fo:
+    print(line)
+fo.close()
+#通过调整指针回到初始写入数据的位置，才输出指针之后新写入的数据
+fo=open("output.txt","w+")
+ls=["中国","法国","美国"]
+fo.writelines(ls)
+fo.seek(0)
+for line in fo:
+    print(line)
+fo.close()
+中国法国美国
+#自动轨迹绘制
+#AutoTraceDraw.py
+import turtle as t
+t.title('自动轨迹绘制')
+t.setup(800, 600, 0, 0)
+t.pencolor("red")
+t.pensize(5)
+#数据读取
+datals = []
+f = open("data.txt")
+for line in f:
+    line = line.replace("\n","")
+    datals.append(list(map(eval, line.split(","))))
+f.close()
+#自动绘制
+for i in range(len(datals)):
+    t.pencolor(datals[i][3],datals[i][4],datals[i][5])
+    t.fd(datals[i][0])
+    if datals[i][1]:
+        t.rt(datals[i][2])
+    else:
+        t.lt(datals[i][2])
+#一维数据的读入处理,分别从空格和特俗符号分隔的文件中读入数据
+txt=open("读入处理.txt").read()
+ls1=txt.split()
+ls2=txt.split("$")
+print(ls1,ls2)
+['中国', '美国', '日本', '德国', '法国', '英国', '意大利', '中国$美国$日本$德国$法国$英国$意大利'] ['中国 美国 日本 德国 法国 英国 意大利\n中国', '美国', '日本', '德国', '法国', '英国', '意大利']
+#一维数据的写入处理,采用空格和特俗符号分隔数据写入数据
+ls=['中国','美国','日本']
+f=open(fname,'a')
+#f.write(' '.join(ls))
+f.write('$'.join(ls))
+f.close()
+#二维数据的读入处理,从CSV格式文件中读入数据
+fo=open("二维数据.csv")
+ls=[]
+for line in fo:
+    line=line.replace("\n","")
+    ls.append(line.split(","))
+fo.close()
+print(ls)
+[['国家', '首都', '编号'], ['中国', '北京', '100024'], ['美国', '华盛顿', '100025']]
+#二维数据的写入处理,将数据写入CSV格式文件中
+ls=[['日本','东京','100026'],['法国','巴黎','100027']] #二维列表
+f=open("二维数据.csv","a+")
+for item in ls:
+    f.write(','.join(item)+'\n')
+f.close()
+#二维数据采用双层循环遍历每个元素
+ls=[[1,2],[3,4],[5,6]]#二维列表
+item=[]
+for row in ls:
+    for item in row:
+        print(item,end=' ')
+1 2 3 4 5 6 
+#wordcloud库常规使用方法
+import wordcloud
+c=wordcloud.WordCloud()
+c.generate("wordcloud by Python")
+c.to_file("pywordcloud.png")
+<wordcloud.wordcloud.WordCloud at 0x1b2ded1a1d0>
+#一段文本词云绘制
+import jieba
+import wordcloud
+txt="程序设计语言是计算机能够理解和识别用户操作意图的\
+一种交互体系,它按照特定规则组织计算机指令,使计算机能够自\
+动进行各种运算处理."
+w= wordcloud.WordCloud( width=1000,font_path="msyh.ttc",height=700)
+w.generate(" ".join(jieba.lcut(txt)))
+w.to_file("pywcloud.png")
+<wordcloud.wordcloud.WordCloud at 0x1b2e0df5470>
+#文本文件常规矩形词云绘制
+#GovRptWordCloudv1.py
+import jieba
+import wordcloud
+f = open("新时代中国特色社会主义.txt", "r", encoding="utf-8")
+t = f.read()
+f.close()
+ls = jieba.lcut(t)
+txt = " ".join(ls)
+w = wordcloud.WordCloud(width = 1000, height = 700,
+    background_color="white",font_path="msyh.ttc",max_words=15)
+w.generate(txt)
+w.to_file("grwordcloud2.png")
+<wordcloud.wordcloud.WordCloud at 0x1b2e58aebe0>
+#文本文件不规则图形词云绘制
+#GovRptWordCloudv2.py
+import jieba
+import wordcloud
+from scipy.misc import imread
+mask = imread("chinamap.png")#调用不规则图形—中国地图
+excludes = { }
+f = open("新时代中国特色社会主义.txt", "r", encoding="utf-8")
+t = f.read()
+f.close()
+ls = jieba.lcut(t)
+txt = " ".join(ls)
+w = wordcloud.WordCloud(width = 1000, height = 700,
+    background_color = "white",font_path = "msyh.ttc",
+    mask = mask)
+w.generate(txt)
+w.to_file("grwordcloud4.png")
+D:\Anacondapython\lib\site-packages\ipykernel_launcher.py:6: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+  
+<wordcloud.wordcloud.WordCloud at 0x1b2e0bd8668>
+#打印输出附件文件的有效行数，注意：空行不计算为有效行数
+s=0
+f=open("latex.log","rt",encoding="utf-8")
+for line in f.readlines():#一次读入，分行处理
+    line=line.strip('\n')
+    if line !="":
+        s +=1
+    else:
+        continue
+print("共{}行".format(s))
+共4951行
+#打印输出附件文件的有效行数，注意：空行不计算为有效行数
+f = open("latex.log")
+s = 0
+for line in f:
+    line = line.strip('\n')
+    if len(line) == 0:
+        continue
+    s += 1
+print("共{}行".format(s))
+共4951行
+#统计附件文件的小写字母a-z的字符分布，即出现a-z字符的数量，并输出结果；‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬同时请输出文件一共包含的字符数量
+f = open("latex.log")
+cc = 0
+d = {}
+for i in range(26):
+    d[chr(ord('a')+i)] = 0
+for line in f:
+    for c in line:
+        d[c] = d.get(c, 0) + 1
+        cc += 1
+print("共{}字符".format(cc), end="")
+for i in range(26):
+    if d[chr(ord('a')+i)] != 0:#使用 ord('a')+i 配合 range()函数 可以遍历一个连续的字符表
+        print(",{}:{}".format(chr(ord('a')+i), d[chr(ord('a')+i)]), end="")
+共244019字符,a:9620,b:525,c:8769,d:1046,e:15585,f:8653,g:4548,h:8882,i:17587,j:62,k:122,l:9090,m:736,n:25730,o:13812,p:961,q:132,r:13755,s:12948,t:14049,u:4850,v:294,w:427,x:276,y:359,z:4
+#统计附件文件中与其他任何其他行都不同的行的数量，即独特行的数量
+f = open("latex.log")
+ls = f.readlines()
+s = set(ls)
+for i in s:
+    ls.remove(i)#ls.remove()可以去掉某一个元素，如果该行是独特行，去掉该元素后将不在集合t中出现
+t = set(ls) #上一行代码移除集合s中元素，则ls中剩下的都是重复元素变为集合赋给t
+print("共{}独特行".format(len(s)-len(t)))
+共291独特行
+#附件是一个CSV文件，请将每行按照列逆序排列后输出，不改变各元素格式（如周围空格布局等）
+f = open("data.csv")
+for line in f:
+    line = line.strip("\n")
+    ls = line.split(",")
+    ls = ls[::-1]
+    print(",".join(ls))
+f.close()
+7,6,5,4,3,2,1
+ 5, 6, 4, 1, 7, 2, 3,8
+ 2, 4, 7, 5, 8, 3, 1,6
+'k','j','i','z','y','x','c','b','a'
+ 'x', 'a', 'z', 'y', 'i', 'c', 'j', 'b','k'
+ 'x', 'y', 'j', 'i', 'k', 'a', 'b', 'c','z'
+ 'k', 'j', 'i', 'c', 'z', 'x', 'b', 'y','a'
+ 3, 8, 6, 1, 7, 4, 2,5
+#‪‬‪‬‪‬‪‬‮‬‪‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬请去掉附件CSV文件中每个数据前后空格，数据之间仅用逗号(,)分割并‪‬‮‬‪‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪打印输出
+f = open("data.csv")
+for line in f:
+    for c in line:
+        c=c.strip(" ")
+        print(c,end='')
+1,2,3,4,5,6,7
+8,3,2,7,1,4,6,5
+6,1,3,8,5,7,4,2
+'a','b','c','x','y','z','i','j','k'
+'k','b','j','c','i','y','z','a','x'
+'z','c','b','a','k','i','j','y','x'
+'a','y','b','x','z','c','i','j','k'
+5,2,4,7,1,6,8,3
+#计算文本的平均列数
+f = open("latex.log")
+s=0
+t=0
+for line in f:
+    line = line.strip('\n')
+    if len(line)==0:
+        continue
+    else:
+        s +=len(line)
+    t +=1
+print("{:.0f},{},{}".format(s/t,s,t))
+48,238709,4951
+#将附件CSV格式文件按行进行倒序排列且‪‬‪‬‪‬‪‬‪‬‮‬‪‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬每行数据倒序排列；‪‬‪‬‪‬‪‬‪‬‮‬‪‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬
+#使用分号（;）代替逗号（,）分割数据，无空格；‪‬‪‬‪‬‪‬‪‬‮‬‪‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‮‬按照上述要求转换后将数据输出
+f = open("data.csv")
+lt=f.readlines()
+lt=lt[::-1]
+ls=[]
+for line in lt:
+    line = line.strip("\n")
+    line = line.replace(" ", "")
+    ls = line.split(",")
+    ls = ls[::-1]
+    print(";".join(ls))
+f.close()
+3;8;6;1;7;4;2;5
+'k';'j';'i';'c';'z';'x';'b';'y';'a'
+'x';'y';'j';'i';'k';'a';'b';'c';'z'
+'x';'a';'z';'y';'i';'c';'j';'b';'k'
+'k';'j';'i';'z';'y';'x';'c';'b';'a'
+2;4;7;5;8;3;1;6
+5;6;4;1;7;2;3;8
+7;6;5;4;3;2;1
