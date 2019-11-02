@@ -1,0 +1,50 @@
+#函数的定义，如计算n的阶乘
+def fact(n):
+    s=1
+    for i in range(1,n+1):
+        s*=i
+    return s 
+#函数就是IPO的实现，也是一段完整代码的封装
+#函数的调用
+fact(10)
+#定义的函数可以有参数，也可没有，但必须保留括号
+def chr():
+    print("我是函数")
+chr()
+#定义的函数也可有多个参数，分为非可选参数和可选参数(它可有可无，有的话需设置初值)
+def fact(n,m=1):
+    s=1
+    for i in range(1,n+1):
+        s*=i
+    return s//m
+a,b,c=fact(10),fact(10,5),fact(m=5,n=10)
+print(a,b,c)
+#*b来表达不确定数量的参数
+def fact(n,*b):
+    s=1
+    for i in range(1,n+1):
+        s*=i
+    for c in b:
+        s*=c
+    return s
+a,b=fact(10,3),fact(10,3,5,8)
+print(a,b)
+#函数返回值，return是可有可无，也可返回多个结果
+def fact(n,m=1):
+    s=1
+    for i in range(1,n+1):
+        s*=i
+    return s//m,n,m
+a,b,c=fact(10,5)
+print(a,b,c)
+#局部变量和全局变量
+n,s=10,100
+def fact(n):
+    s=1
+    for i in range(1,n+1):
+        s*=i
+    return s
+print(fact(n),n,s)
+#lambda函数
+f=lambda x,y :x+y
+f(10,15)
