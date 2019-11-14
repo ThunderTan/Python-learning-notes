@@ -1,0 +1,60 @@
+#文件的读取
+import os
+os.chdir("d:\pydata")
+#文本形式打开文件(针对ANSI编码的文件)
+tf=open("f_ANSI.txt","rt")
+print(tf.readline())
+tf.close()
+#文件的读取
+import os
+os.chdir("d:\pydata")
+#文本形式打开文件(针对ANSI编码的文件)
+tf=open("f_ANSI.txt","rt")
+print(tf.readline())
+tf.close()
+本报北京10月19日电（记者王斯敏、李晓、张春雷 见习记者王美莹）在新中国成立70周年之际，中国女排在第十三届女排世界杯比赛中以十一连胜的骄人成绩夺冠，为祖国和人民赢得了荣誉。习近平总书记专门邀请中国女排队员、教练员代表参加庆祝中华人民共和国成立70周年招待会，并在会前亲切会见中国女排代表时强调，要大力弘扬新时代的女排精神。为系统梳理女排精神孕育、传承、发展的历程，深刻挖掘其所彰显的时代价值，全面阐释其所秉持的核心内涵，19日，由北京师范大学和光明日报社联合主办的“新时代的中国女排精神高端论坛”在京召开。
+#二进制形式打开文件
+bf=open("f.txt","rb")
+print(bf.readline())
+bf.close()
+b'\xd6\xd0\xb9\xfa\xca\xc7\xb8\xf6\xce\xb0\xb4\xf3\xb5\xc4\xb9\xfa\xbc\xd2\xa3\xa1\xd6\xd0\xb9\xfa\xca\xc7\xb8\xf6\xce\xb0\xb4\xf3\xb5\xc4\xb9\xfa\xbc\xd2\xa3\xa1\xd6\xd0\xb9\xfa\xb7\xa8\xb9\xfa\xc3\xc0\xb9\xfa\xd6\xd0\xb9\xfa \xc3\xc0\xb9\xfa \xc8\xd5\xb1\xbe\xd6\xd0\xb9\xfa$\xc3\xc0\xb9\xfa$\xc8\xd5\xb1\xbe'
+#文件编码主要有ANSI，utf-8，unicode，gbk，
+'''ANSI是一种字符代码，为使计算机支持更多语言，通常使用 0x00~0x7f 范围的1 个字节来表示 1 个英文字符。
+超出此范围的使用0x80~0xFFFF来编码，即扩展的ASCII编码。'''
+'''GBK即汉字内码扩展规范，K为扩展的汉语拼音中"扩"字的声母。英文全称Chinese Internal Code Specification。
+GBK编码标准兼容GB2312，共收录汉字21003个、符号883个，并提供1894个造字码位，简、繁体字融于一库。'''
+'''Unicode(统一码、万国码、单一码)是计算机科学领域里的一项业界标准，包括字符集、编码方案等。
+Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，
+以满足跨语言、跨平台进行文本转换、处理的要求。1990年开始研发，1994年正式公布。'''
+'''utf-8就是每次8个位传输数据，而 UTF-16 就是每次16个位。UTF-8就是在互联网上使用最广的一种 unicode 的实现方式，
+这是为传输而设计的编码，并使编码无国界，这样就可以显示全世界上所有文化的字符了。'''
+#参考资料：https://blog.csdn.net/joyfixing/article/details/79971667
+#https://baike.so.com/doc/1419548-1500571.html
+#https://baike.so.com/doc/4443890-4652181.html
+#https://baike.so.com/doc/2389354-2526441.html
+#针对utf-8编码的文件直接以文本形式读入文件时报错UnicodeDecodeError
+#文件网址http://www.mqh.gov.cn/CHANL/76c29d98f5f54f00ae43b7848a96d7a8/594e895a51c34584b381271213397eb5.HTML
+#f=open("f_utf.txt",'rt')
+#忽略编码错误才能输出
+f=open('f_utf.txt','rt',errors='ignore')
+af=open('f_utf.txt','rt',encoding='utf-8')
+t1=f.read()
+t=af.read()
+print(t1,'/',t)
+f.close()
+af.close()
+锘挎湰鎶ュ寳浜10鏈19鏃ョ數锛堣拌呯帇鏂鏁忋佹潕鏅撱佸紶鏄ラ浄 瑙佷範璁拌呯帇缇庤幑锛夊湪鏂颁腑鍥芥垚绔70鍛ㄥ勾涔嬮檯锛屼腑鍥藉コ鎺掑湪绗鍗佷笁灞婂コ鎺掍笘鐣屾澂姣旇禌涓浠ュ崄涓杩炶儨鐨勯獎浜烘垚缁╁ず鍐狅紝涓虹栧浗鍜屼汉姘戣耽寰椾簡鑽ｈ獕銆備範杩戝钩鎬讳功璁颁笓闂ㄩ個璇蜂腑鍥藉コ鎺掗槦鍛樸佹暀缁冨憳浠ｈ〃鍙傚姞搴嗙濅腑鍗庝汉姘戝叡鍜屽浗鎴愮珛70鍛ㄥ勾鎷涘緟浼氾紝骞跺湪浼氬墠浜插垏浼氳佷腑鍥藉コ鎺掍唬琛ㄦ椂寮鸿皟锛岃佸ぇ鍔涘紭鎵鏂版椂浠ｇ殑濂虫帓绮剧炪備负绯荤粺姊崇悊濂虫帓绮剧炲瓡鑲层佷紶鎵裤佸彂灞曠殑鍘嗙▼锛屾繁鍒绘寲鎺樺叾鎵褰版樉鐨勬椂浠ｄ环鍊硷紝鍏ㄩ潰闃愰噴鍏舵墍绉夋寔鐨勬牳蹇冨唴娑碉紝19鏃ワ紝鐢卞寳浜甯堣寖澶у﹀拰鍏夋槑鏃ユ姤绀捐仈鍚堜富鍔炵殑鈥滄柊鏃朵唬鐨勪腑鍥藉コ鎺掔簿绁為珮绔璁哄潧鈥濆湪浜鍙寮銆 / ﻿本报北京10月19日电（记者王斯敏、李晓、张春雷 见习记者王美莹）在新中国成立70周年之际，中国女排在第十三届女排世界杯比赛中以十一连胜的骄人成绩夺冠，为祖国和人民赢得了荣誉。习近平总书记专门邀请中国女排队员、教练员代表参加庆祝中华人民共和国成立70周年招待会，并在会前亲切会见中国女排代表时强调，要大力弘扬新时代的女排精神。为系统梳理女排精神孕育、传承、发展的历程，深刻挖掘其所彰显的时代价值，全面阐释其所秉持的核心内涵，19日，由北京师范大学和光明日报社联合主办的“新时代的中国女排精神高端论坛”在京召开。
+unicode
+#针对unicode编码的文件直接以文本形式读入文件时报错UnicodeDecodeError
+#f=open("f_unicode.txt",'rt')
+#忽略编码错误才能输出
+f=open('f_unicode.txt','rt',errors='ignore')
+#先以二进制打开文件，然后对读取的内容进行utf编码
+sf=open('f_unicode.txt','rb')
+t1=f.read()
+t=sf.read()
+t2=t.decode('utf-16')
+print(t1,'/',t,'/',t2)
+f.close()
+sf.close()
+,gbS琋10g19錯5皨媠痚Oe0NgSf0 _%f鳀 翂`N皨媠箖	(W癳-N齎b藌70hTt^KNE-N齎sY抍(W,{AS	NJ\sY抍NLuog詋[-N錘ASN迯軃剉剼篘b閪:Y燪:NVy齎孴篘lb崡_哊c儔0`N褟s^;`fN皨N钑愾-N齎sY抍朮T0Ye脋XT鉔h埪S燫哵]y-NNS篘lqQ孴齎b藌70hTt^踒卂Ov^(WOMR睳RO翂-N齎sY抍鉔h場e:_亯'Y汻_lb癳鰁鉔剉sY抍緗^y0:N鹼邁砲tsY抍緗^yU[瞼0 Ob0裇U\剉哠z駇;Rc榗vQ@bp_>f剉鰁鉔鱊<PhQb柺憊Q@b蓎c剉8h胈匭祄19錯1uS^'Yf[孴IQf錯b>yT;N濺剉 癳鰁鉔剉-N齎sY抍緗^y貧飠簨[W (W琋霺_0 / b"\xff\xfe,g\xa5b\x17S\xacN1\x000\x00\x08g1\x009\x00\xe5e5u\x08\xff\xb0\x8b\x05\x80\x8bs\xafeOe\x010NgSf\x010 _%f\xf7\x96 \x00\xc1\x89`N\xb0\x8b\x05\x80\x8bs\x8e\x7f\xb9\x83\t\xff(W\xb0e-N\xfdV\x10b\xcbz7\x000\x00hTt^KNE\x96\x0c\xff-N\xfdVsY\x92c(W,{AS\tNJ\\sY\x92c\x16NLuog\xd4k[\x8d-N\xe5NAS\x00N\xde\x8f\xdc\x80\x84v\x84\x9a\xbaN\x10b\xe9~:Y\xa0Q\x0c\xff:NVy\xfdV\x8cT\xbaN\x11lb\x8d\x97_\x86Nc\x83\x89\x8a\x020`N\xd1\x8fs^;`fN\xb0\x8b\x13N\xe8\x95\x80\x90\xf7\x8b-N\xfdVsY\x92c\x1f\x96XT\x010Ye\xc3~XT\xe3Nh\x88\xc2S\xa0R\x86^]y-NNS\xbaN\x11lqQ\x8cT\xfdV\x10b\xcbz7\x000\x00hTt^\xdbb\x85_\x1aO\x0c\xffv^(W\x1aOMR\xb2N\x07R\x1aO\xc1\x89-N\xfdVsY\x92c\xe3Nh\x88\xf6e:_\x03\x8c\x0c\xff\x81\x89'Y\x9bR\x18_lb\xb0e\xf6e\xe3N\x84vsY\x92c\xbe|^y\x020:N\xfb|\xdf~\xb3h\x06tsY\x92c\xbe|^yU[\xb2\x80\x010 O\x7fb\x010\xd1SU\\\x84v\x86S\x0bz\x0c\xff\xf1m;R\x16c\x98cvQ@bp_>f\x84v\xf6e\xe3N\xf7N<P\x0c\xffhQb\x97\x10\x96\xca\x91vQ@b\xc9y\x01c\x84v8h\xc3_\x85Q\xb5m\x0c\xff1\x009\x00\xe5e\x0c\xff1u\x17S\xacN\x08^\x03\x83'Yf[\x8cTIQ\x0ef\xe5e\xa5b>yT\x80\x08T;N\x9eR\x84v\x1c \xb0e\xf6e\xe3N\x84v-N\xfdVsY\x92c\xbe|^y\xd8\x9a\xefz\xba\x8b[W\x1d (W\xacN\xecS\x00_\x020" / 本报北京10月19日电（记者王斯敏、李晓、张春雷 见习记者王美莹）在新中国成立70周年之际，中国女排在第十三届女排世界杯比赛中以十一连胜的骄人成绩夺冠，为祖国和人民赢得了荣誉。习近平总书记专门邀请中国女排队员、教练员代表参加庆祝中华人民共和国成立70周年招待会，并在会前亲切会见中国女排代表时强调，要大力弘扬新时代的女排精神。为系统梳理女排精神孕育、传承、发展的历程，深刻挖掘其所彰显的时代价值，全面阐释其所秉持的核心内涵，19日，由北京师范大学和光明日报社联合主办的“新时代的中国女排精神高端论坛”在京召开。
